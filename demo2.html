@@ -1,0 +1,18 @@
+<html>
+<head>
+<script src="brython.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python">
+from browser import document
+def change():
+	document["display"].html = "<img src='C1.png' />"
+
+document["button1"].bind("click", change)
+</script>
+
+<button id="button1">clic</button>
+<div id="display"></div>
+
+</body>
+</html>

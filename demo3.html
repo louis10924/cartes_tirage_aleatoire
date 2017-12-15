@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="brython.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python">
+from browser import document
+
+
+cartes = ["C1","CR","CD","CV","CX","C9","C8","C7","K1","KR","KD","KV","KX","K9","K8","K7","P1","PR","PD","PV","PX","P9","P8","P7"]
+n=0
+
+def change(event):
+	global cartes, n
+	document["display"].clear()
+	document["display"].html = "<img src='" + cartes[n] +".png' width='400' />"
+	n = n + 1
+
+document["button1"].bind("click", change)
+</script>
+
+<button id="button1">clic</button>
+<div id="display"></div>
+
+</body>
+</html>

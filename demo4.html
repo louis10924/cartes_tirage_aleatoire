@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="brython.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python">
+from browser import document
+
+def display(text):
+document["display"].clear()
+document["display"].html = text
+def change(event):
+
+display("abcdef")
+
+</script>
+
+
+<div id="display"></div>
+
+</body>
+</html>
