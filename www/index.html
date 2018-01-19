@@ -1,46 +1,93 @@
-<!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
+<head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+ 
+<script src="brython.js"></script>
+<script src="brython_stdlib.js"></script>
+<script type="text/python">
+from browser import document, html, alert
+
+def display(text):
+	document["display"].clear()
+	document["display"].html = text
+
+#---------------------------------
+
+import random
+
+cartes = ["C1","CR","CD","CV","CX","C9","C8","C7","K1","KR","KD","KV","KX","K9","K8","K7","P1","PR","PD","PV","PX","P9","P8","P7","T1","TR","TD","TV","TX","T9","T8","T7"]
+random.shuffle(cartes)
+bob = int(input("choisir un nombre entre 1 et 32"))
+# on affiche la premiere cartes
+display("<img src='" + cartes[0] + ".png' width='400' />")
+
+n = 1
+
+def cartes_obo():
+	global cartes, n
+	display("<img src='" + cartes[n] + ".png' width='400' />")
+	n = n + 1
+	if n == 32:
+		document['cartes'].style.display = 'inline'
+
+i = 0
+select = ''
+def cartes_select(ev):
+	global i, select
+	select = select + str(ev.target.id)
+	ev.target.style.opacity = '0.5'
+	ev.target.style.cursor = 'not-allowed';
+	i = i + 1
+	if i == 3:
+		alert(select)
+
+document['display'].bind('click',cartes_obo)
+document['cartes'].bind('click',cartes_select)
+</script>
+</head>
+
+<body onload="brython()">
+
+<div id="display" style="display:inline"></div>
+
+<div id="cartes" style="display:none">
+	<img id='C1' dataid='C1' src='C1.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CR' dataid='CR' src='CR.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CD' dataid='CR' src='CD.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CV' dataid='CR' src='CV.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='CX' dataid='CR' src='CX.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C9' dataid='CR' src='C9.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C8' dataid='CR' src='C8.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='C7' dataid='CR' src='C7.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='K1' dataid='K1' src='K1.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='KR' dataid='KR' src='KR.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='KD' dataid='KR' src='KD.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='KV' dataid='KR' src='KV.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='KX' dataid='KR' src='KX.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='K9' dataid='KR' src='K9.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='K8' dataid='KR' src='K8.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='K7' dataid='KR' src='K7.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='P1' dataid='P1' src='P1.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='PR' dataid='PR' src='PR.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='PD' dataid='PR' src='PD.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='PV' dataid='PR' src='PV.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='PX' dataid='PR' src='PX.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='P9' dataid='PR' src='P9.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='P8' dataid='PR' src='P8.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='P7' dataid='PR' src='P7.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='T1' dataid='T1' src='T1.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='TR' dataid='TR' src='TR.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='TD' dataid='TR' src='TD.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='TV' dataid='TR' src='TV.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='TX' dataid='TR' src='TX.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='T9' dataid='TR' src='T9.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='T8' dataid='TR' src='T8.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+	<img id='T7' dataid='TR' src='T7.png' style='cursor:pointer;pointer-events:auto;opacity:1' width='100' />
+</div>
+<script type="text/javascript" src="cordova.js"></script>
+</body>
 </html>
